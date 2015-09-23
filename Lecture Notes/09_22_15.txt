@@ -1,0 +1,34 @@
+Yuan Wang
+
+ywang6@scu.edu
+Office 323H (Bannan)
+	12-2pm, or apt.
+
+fractal system/l system
+radiocity
+
+The idea behind creating 3D images on screen: Projection
+	CENTRAL CONCEPT
+
+The final image is always 2d, but this image is created from 3D information
+
+CRT
+	low persistence - need high refresh, good for animation
+	high persistence - low refresh, good for static information
+	resolution - max number of points
+
+	Types
+
+		Raster-scan
+			electron beam is swept across screen, one row at a time
+			goes through all points - either turned on or off
+			each point is acalled a "pixel"
+			picture definition is stored in memory area called frame buffer (refresh buffer)
+				For b/w image, 1bit/pixel is enough so bitmap
+				For color, 23bit/pixel (RGB, 8 bit for each of 3 colors) - pixmap
+		
+		Random-scan display (vector display)
+			electron beam is directed only to those parts where picture is to be displayed
+			like a pen plotter
+			better for line drawing application, not for realistic shaded scenes
+			resizing a vector drawing will not lose resolution
