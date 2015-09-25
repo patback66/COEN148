@@ -1,0 +1,80 @@
+PROJECTION
+
+	vectors give smooth image, always redraw, never lose resolution
+	raster is better for shading
+
+NOW ON TO NEW STUFF: OPENGL
+
+	Open Graphics Library
+		render graphics
+		language-independent, platform-independent
+
+	Windows -> C/C++ Visual Studio
+	OS X C/C++ -> Xcode
+
+	WebGL also works in browser, uses JavaScript
+
+
+API Types:
+	-OpenGL basic (glut), prefixed with 'glut'
+		-mainly for managing display for any windowing system
+		-an interface to other device-specific window system
+
+How to include:
+	Windows:
+		#include <GL/glut.h>
+		#include <GL/glu.h>
+		@include <GL/gl.h>
+
+	if including glut.h, you do not need to include gl.h and glu.h, glut ensures they are included
+
+Graphics Primitives Algorithms
+	- OpenGL has functions to draw primitives
+	- the functions are implemented based on algorithms
+
+Line Drawing Algorithm
+	- monitor is a raster display
+	- So, how do we draw pixels?
+	- when given two end points, figure out which pixels it goes through, simulate the line
+		- low resolution might give jagged lines
+			- limitation of the display
+	-Have to use the "closest" pixel to approximate the line, only horizontal, vertical
+
+	Line equation: y = mx+b  -> m = (y2-y1)/(x2-x1)	
+	-check in algorithm which pixel is closest 
+		- calculate x/y, get closest
+		- but also need something that is efficient -> need a smart algorithm
+		
+Circle Drawing Algorithms
+	x^2 + y^2 = r^2
+
+	y=+/- sqrt(R^2-X^2)
+
+	Circles are symmetric, only need to do 1/8
+		- only need section above y=x, can use reflection/transformation to get the others
+
+	x^2 + y^2 - R^2 > 0 outside the circle
+					< 0 inside the circle
+	for every step calculate F(M)
+		only need to calculate F at next midpoint
+
+	If we know the next midpoint
+		We Know:
+			F(M)
+			Which midpoint to choose
+	If we know F(M)
+		We Know:
+			the next midpoint
+
+	1. R
+	2. F(M), d=5/4 - R 
+	3. Draw (x, y)
+	4 If d<0, d += 2x + 3, x = x + 1, y = y
+	  If d>0, d += 2(x - y) + 5, x = x + 1, y = y - 1
+  	5. If x < y, goto 3
+  	  Else done
+
+Midpoint Algorithm
+
+Fill a polygon - how to decide if a pixel is inside the polygon
+
