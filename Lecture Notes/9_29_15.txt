@@ -1,0 +1,120 @@
+Lecture 3:
+
+Recap:
+	Line Drawing
+		DDA Algorithm
+		Midpoint Algorithm
+		Bresenham? Algorithm
+	Circle
+		Mid-Point Algorithm
+
+Today's Topics
+	-Left over issues of line drawing
+	-area filling algorithms
+
+Primitive Attributes
+	-Line width
+	-Line style (e.g. dashed line)
+
+Line Width
+	-if the line is horizontal, obviously, to thicken the line, add pixels in the y direction
+		-but which side to add
+	-similarly simple for the x direction
+	-If the line has a slope |m|<1, then to thicken the line, we can add pixels in Y direction
+	-If the line has a slope |m|>1, then to thicken the line, we can add pixels in the X direction
+	-Minor Issue:
+		-Line width of a 45 degree line
+			-can't add all on the horizontal line
+		-Even if the line width is 5 pixels, the 45 degree line is thinner than the vertical line
+
+Line End:
+	1. Butt cap
+	2. Round cap
+		-adding a semicircle to each butt cap
+	3. Projecting square cap
+		-extend the line and add butt cap (half of the line width)
+
+Line Style
+	-dashed, dotted, dot-dashed
+	-idea: skip over a number of pixels
+	-could use binary digits to indicate the dashed line pattern, for example, 11100, means every 3 pixels, there is a 2-pixel space
+
+	-Issue: same number of pixels have different length, depends on the slope of the line
+		-Solution:
+			-adjust each solid span and space span according to the slope
+			-treat each dashes as individual line segments, calculate end point and draw each dash with equeal length
+
+Curve with thickness
+	-Methods:
+		-check slope for different sections
+		-if slope<1, add pixels vertically
+		-if slope>1, add pixels horizontally
+
+	-draw two concentric circles around the original circle
+		-then fill the pixels in-between
+
+Anti-Aliasing
+	-since the raster display are only an approximation of the mathematical primitives using pixels, the results are sometimes, have a jagged/stair-steop appearance. This is called aliasing
+	-techniques:
+		-Idea: pixels used to approximate the real line have a different extent of "closeness" with the real line. If we coudl find a way to represent this "closeness", then we could assign different color value to adifferent pixels, the closer the pixel, the higher the color intensity of the pixel
+		-less-overlap pixels: lighter color
+		-more-overlap pixels: darker color
+		-blur effect is created at the edge, the line therefore looks smoother
+	-How to measure the extent of "overlap?"
+		-Super-samopling
+		-each pixel is a square, and is divided into 9 sub pixels
+		-then calculate how many sub-pixels touch the line path.
+		-The intensity of the pixel will be proportional to this sub-pixels count
+		-super-sampling: sub-pixels with weight value
+			-we can also give weight to each sub-pixel
+			-center sub-pixel has more weight, is 1/3 of total, corner sub-pixel has less weight, is 1/16 of the total
+		-another way of doing it, is to calculate the area of the overlapped area of pixel and line
+			-assuming the actual line ahsa a width of 1 pixel, each pixel is a ssquare.
+			-The color value of the pixel will be approximately proportional
+	-These techniques can also be used on area boundaries to remove jagged appearance. 
+
+Polygon filling
+	-OpemnGl function can create this:
+		-If you are asked to implement the function to do this, you are able to draw lines to form the polygon. But how do you fill the polygon with the color? How do you know which pixel are inside the polygon?
+	-Algorithms:
+		-Scan line fill
+			-find intersection of scan-line and boundary
+			-check each pixel on each scan line, see if it is within the area
+		-Seed Fill/Flood Fill
+			-start filling from inside till reach the boundary
+			-from a pixel know to be inside (seed), expand it, till all the area is filled
+
+Convex Polygon
+	-line segment connection any two internal points will be totally inside the polygon
+	-calculate intersection points and fill in-between pixels
+
+Concave Polygon
+	-calculate the intersection points of scan line and edge of the polygon, pixels in-between are filled
+	-after determined all intersection points, order the intersection points
+	-pair them up - pixels between each pair are the pixels within your polygon
+	-SPECIAL CASE:
+		-point on two edges, 3 intersections --> use p2 twice
+		-point 1 on two edges, but the two edges are on different sides - if you use P! twice, it will not be right. P1 will still be used once
+			-check if the two related edges are at the same side of scan line, or different side
+			-separate the common pixel (shorten one edge)
+			-if Y value of the two end points of the two edges are monotonically increasing or decreasing, we either shorten upper endpoint's Y of the current edge, or decrease upper endpoint's Y of the next edge
+		-scan line aligns with one edge
+			-if the edge is horizontal, do not calculate intersection - move on until innermost intersection
+HOMEWORK:
+	-paint by pixel
+		-add point on click, draw line between points
+		-double click to close
+		-then fill
+			-implement scanline yourself
+				-check intersection
+					-to fill line in between, call opengl
+
+Seed Fill
+	-start with a pixel inside, paint the interior point by point, our to the boundary
+		-useful for irregular borders
+	-start with a pixel inside, recursively (use stack) check its neighboring pixels (4 neighbors or 8 neighbors)
+	-4 neighbor might miss some area
+
+Scan-Line vs Flood-fill
+	-scan-line is better for simple polygons, circles, ellipse
+	-flood fill is better for complex program
