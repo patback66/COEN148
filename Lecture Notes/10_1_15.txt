@@ -1,0 +1,54 @@
+10_1_15
+
+Recap: Anti-Aliasing
+
+Today
+-------------
+Transformation
+2D Viewing
+
+
+2D Viewing
+----------
+		-2d vieweing is the process of creating 2d computer graphics
+		-it is like taking a picture of a target picture
+		-you first select how big your view is and where
+		-the picture you took, or the image that ends up in your camera is the resulting 2D graphics
+		-Stuff outside your view is clipped
+		-Clipping is one of the main steps
+		-of course, that might not be a good choice for your view, you can choose to set your view (clipping window) at somewhere else
+			-and create the 2d graphics
+		-if you don't like the angle of your resulting graphics, you can also rotate your clipping window
+
+	-How to actually implement this photo-taking process
+		-1st, specify your target image in WORLD COORDINATE (show you za warudo)
+		-Then, transform your image into viewing coordinates, then clip, then transform your viewing coordinates into screen coordinates
+		-Simply put, the process is
+				world coordinate -> screen coordinate
+
+	-More complete procedure
+
+		-each object might be defined in its own coordinate system
+		-transform into viewing coordinate
+			-but normally, viewing coordinate is parallel to the world coordinate aes
+		-CLIP the image, then transform into VIEWPORT (might have a different proportion than clipping window)
+			-define this for use in opengl
+		-Place the VIEWPORT into WISPLAY WINDOW coordinate system (which itself is somewhere in the SCREEN coordinate system)
+
+	-Normalization
+		-To make the viewing process independent of any output device, graphics systems will convert object descriptions to normalized coordinates
+		-Normalization will map the coordinates into the range [0,1] or [-1,1], that is, the image is within a unit square
+		-clipping is usually performed in normalized coordinates
+
+		-With normalization, the viewport can be defined in two different ways:
+			1) Normalized coordinates
+				-clipping can be applied using either the clipping-window boundaries or the viewport boundaries
+			2) screen coordinates
+				-transform clippoing window into normalized square, clip in normalized coordinates, then transform to viewport specified in screen coordinates
+
+	-2D Graphics pipeline
+		-this is the process of transforming from model coordinate to device roodinate
+
+	-Clipping Algorithms
+		-next time
+
