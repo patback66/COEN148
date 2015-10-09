@@ -1,0 +1,26 @@
+10_08_15
+
+Clipping
+
+Today:
+3D Viewing
+3D Transformation
+3d Viewing detail
+
+Next time: 3D Clipping
+
+Text Clipping
+-3 Scales
+	-Keep whole string
+	-Keep whole Char
+	-Pixel scale/clip
+
+3D Viewing
+	-Model Coordinates
+		-Local Cooordinates
+	-Put into scene (world) coordinates
+	-Normalize the coordinates
+	-Translate to viewing cooordinates
+	-Now project onto a 2d projection plane
+		-projection is all mathematics
+		

@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1444162012 source:/home/maskoken/Dropbox/Documents/COEN148/Assignments/Homework1/Homework1/main.cpp
+	<windows.h>
+	<GLUT/glut.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/glut.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<vector>
+	<stdlib.h>
+

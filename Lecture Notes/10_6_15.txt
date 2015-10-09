@@ -1,0 +1,18 @@
+10_6_15
+
+Lecture 5
+
+Recap
+-2D graphics pipeline
+-2D Transformation and viewing
+-clipping (left issue)
+
+Today's topic: 2D Clipping
+
+Types of clipping:
+	-point clipping
+	-line clipping
+	-polygon clipping
+	-curve clipping (circles, ellipses, spline)
+	-text clipping
+	

@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1444087297 source:/home/maskoken/Dropbox/Documents/COEN148/Assignments/HW1/HW1/main.cpp
+	<stdio.h>
+	<GL/glut.h>
+	<GL/gl.h>
+	<vector>
+
