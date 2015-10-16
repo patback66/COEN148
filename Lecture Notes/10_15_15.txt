@@ -1,0 +1,53 @@
+10_15_15
+
+3D Object Representation
+
+Solid Modeling
+	-Difference from boundary
+		-complete volume information
+		-for example, if you cut out a piece, the rest of teh part is still a complete object
+	-2d Contour
+	-3D contour
+		-isosurface
+		-density fields
+		-2 objects get closer, fields change, start to combine/move towards each other
+	-Metaball
+		-isosurface polygonization
+		-combine many isosurfaces at different distances to form the object
+	-Sweeping
+		-rotation of a curve
+	-CSG (Constructive Solid Geometry)
+		-method to create complex, new 3d objects from simple operations
+		-3 operations: union, difference (subtraction), intersection
+		-Use binary tree to represent
+			-leaf: primitive objects
+			-node: operations
+		-Idea of algorithm:
+			-Union: use the BSP tree to determine if one object's polygons were inside of the other object. The polygons that were, were removed. The result is the union of the two objects, with all the internal geometry removed.
+			-Subtraction: can be done by removing polygons from A that are in B
+			-Intersection: 
+			-Other idea of algorithm: use ray casting
+	-Quadtree
+		-2d representation method (data structure)
+		-Recursively divide the image into quadrants. It could be used to compress the image
+		-Everything inside a quadrant has the same color
+		-How to divide: check each region of the 4 quadrants, if homogeneous (same color), then stop, otherwise, divide into subquadrants.
+		-Representation: use a tree
+			-Initial element, 4 children
+	-Octrees
+		-3d representation method (data structure)
+		-Recursively divide the image into octants
+		-Use tree, 8 data elements for each node
+		-Final subdivided 3d space is called volume elements (voxels) (like a 3d pixel)
+		-Note: each voxel can have color, density, mass, and other physical characteristics
+		-Can divide down into the size of 1 pixel
+		-How to use
+			-accept definiton of object in any form
+		-Applications
+			-medical imaging, boolean operations, collision detection, physical simulation, games (terrain), digital sculpting
+		-Polygons vs Voxels
+			-Voxels are the future - contain more information, but uses more memory
+			-voxels can be generated procedurally. Can be used in game modifiability and destructibility of terrain and objects
+	-BSP tree (Binary Space Partitioning Tree)
+		-similar to octree, but instead of divide into 8 octants, divide into 2 partitions with a plane that can be at any position and orientation
+		-It can be used in hidden-surface determination and collision detection

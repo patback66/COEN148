@@ -1,0 +1,33 @@
+10_13_15
+
+3D Clipping
+
+Polygon Clipping
+	-apply 2d clipping to edges
+
+3D Object Representation
+	-3 Ways to represent an object
+		1) Boundary representation:
+			describe the surface of the 3D object, the boundary of the object is like infinitesimally thin eggshell. Almost all visual models used in games and film are shell models
+		2) Solid modeling
+			ensure surfaces meet properly and that the object is geometrically correct. Cross-section can be rendered, used in CAD and medical applications
+		3) Algorithmic Modeling
+			Using function or rules to create object recursively
+
+Boundary Representation
+	-most commonly used method, is using polygon to represent the surface
+	-triangeles are more used because a trinagle is a plane, and easier to calculate the normal (surface direction)
+	-"Polygon mesh"
+	-Data structure:
+		-Using Vertex list
+			-simple, but not widely used , because you have to figure out which vertices form a surface
+		-Using face vertex list
+			-more widely used, has information of every face, and vertices to face pointer
+			Faces[ | | | | |], each Faces[i] holds a vertex list - 3 vertices each
+		-Using face vertex edge list
+			-easier to manipulatre mesh geometery
+			-but large storage
+			-vertex table, edge table, surface table
+
+Equation-based (Second-degree quadratic equation)
+	

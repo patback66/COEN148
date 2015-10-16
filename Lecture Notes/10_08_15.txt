@@ -23,4 +23,11 @@ Text Clipping
 	-Translate to viewing cooordinates
 	-Now project onto a 2d projection plane
 		-projection is all mathematics
-		
+	-Now fit into clipping window
+	-View volume
+		-In between far clipping plane and near clipping plane
+	-Put into screen coordinates - the viewport
+
+3D Graphics Pipeline
+	-MC -> Modeling Transformation -> WC -> Viewing Transformation -> VC -> Projection Transformation -> PC ->> Normailzation Transformation and Clipping -> NC -> Viewport Transformation -> DC
+	
