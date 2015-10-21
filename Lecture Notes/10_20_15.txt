@@ -1,0 +1,96 @@
+10_20_15
+
+3 sets data
+	indecies
+		9 numbers - only need first 3
+	vertices
+		triangles for polygon mesh
+		coturning
+	show wireframe and solid
+
+Solid Modeling
+	metaball
+	quadframe/octoframe
+
+Algorithmic Modeling (Procedural Modeling)
+	-Certain natural objects, like terrain, plants, clouds, fires, furs, do not have regular shapes and smooth sides. It is difficult to represent them using equations
+	-Also, some massive complex model, like a pretty pattern, city buildings, is easier to model using algorithmic modeling
+	-Shells, etc.
+	-2 Different categories
+		1) Fractal
+		2) Partical System
+
+Fractal
+	-When certain mathematical set recursively repeats itself, can create some complicated surprising shapes
+		-Ex: 
+			-Koch snowflake
+			-Menger Sponge
+			-Famous mendelbrot
+	-Ways to create a fractal
+		-IFS (Iterated Function System)
+		-L-system
+
+IFS (Iterated Function System)
+	-Basically, to use IFS to generate a fractal, we start with a given geometric shape (initiator). Then, subparts of the initiator are then replaced with a pattern (generator)
+	-EX
+		-begin with the set
+		-divide the existing segments into thirds
+		-remove the miodle third
+		-goto step 2
+	=EX
+		-begin with an equilateral triangle (arbitrary)
+		-Reduce teh image by one half
+		-Make three copies of the reduced image
+		-align them in the shape of an equilateral triangle
+		-tranlate the top copy to the left above the lower-left copy
+		-goto step 2
+	-EX
+		-Dragon
+	-The function
+		-transformation functions to transform the initiator into different size, location, angle (scaling, translation, rotation matrix)
+		-They are not limited to these geometric transformations, they could also involve nonlinear transformation and statistical parameters
+		-for P0 = (x0, y0, z0), we can keep applying the transformation function to produce different results based on the previous result
+		-P1 = F(P0), P2 = F)P1), P3 = F(p2)...
+		-F is the transformation function
+	-EX
+		-Sierpinski Gasket (Sierpinski Triangle)
+			-The set S(1) can be obtained by scaling 3 copies of S(0)
+			-The functioon System will then be
+			f1(x) = [1/2	0]
+					[0 		1/2]x
+			f2(x) = [1/2	0]x +	[1/2]
+					[		]		[0]
+	-Ex
+		-Sierpinski Carpet
+	-EX: Binary tree
+		-obtained by continuind to add more branches, using the angle theta and scaling factor r for each set of new branch segments
+		-gets many results dependent on the angle and scale factor
+		-can also use different shapes. Shrink/scale, etc.
+	-EX: Pythagorean Tree
+	-3D Works as well. Just need to define an initial 3D object and a 3D applicable transformation sequence
+
+L System - Lindenmayer system
+	-Aristid Lindenmayer, 1925-1989, Biologiest)
+	-Use rules (grammar) to recursively generate complex shape
+	-L-System is defined as
+		-L = (Alphabet, Initiator, Rule, Constant)
+		-Alphabet: can be replaced (variables)
+		-Initiator: starting string from Alphabet
+		-Rule: how to replace variable, X->Y
+		-Constant: not changed, appear on the right side of the rules
+	-Example
+		Variable 0,1
+		Constant [
+		]
+		Initiator: 0
+		Rules (1->11), (0->1[0]0)
+	-Example
+		Variable 	F (forward)
+		Constant	+ (left 90 degrees)
+					- (right 90 degrees)
+		initiator 	F
+		Rules:
+	-Adding a statistical element introduces an element of randomness - more natural
+
+Particle System (not really today)
+
