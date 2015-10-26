@@ -1,0 +1,36 @@
+10_22_15
+
+Particle System
+Rasterization
+Hidden Surface Removal (Visible Surface Detection)
+
+Particle System
+	-Phrase used loosly
+		-Could mean
+			-modeling technique
+			-animation technique
+			-rendering technique
+	-Common cirteria
+		-collection of particles
+		-random attributes
+	-Modeling fuzzy objects - several advantages
+		-particle simpler to represent
+		-model definition is procedural, controlled by random numbers. Obtaining a highly detailed model is much easier
+	-To compute each from:
+		-New particles are generated into the system
+		-Each new particle is assigned its individual attributes
+		-Any particles that have existed wihtin the system past their prescribed lifetime are extinguished
+		-Remaining particles are moved and transformed according to their dynamic attributes
+		-An image of the living particles is rendered in a frame buffer
+	-Also issues of collision detection. Like particles bounce off a wall or each other
+	-Trees may be modeled using a particle system
+
+Rasterization
+	-Part of the graphics pipeline
+	-Rasterization: process of actually generating pixels on screen by converting projected coordinates into pixels
+		-Rasterization - make fragments (pixels) from clipped objects
+		-clipping - clip objects to viewing volume
+		-hidden surface removal - determine visible fragments
+
+Hidden Surface removal
+	

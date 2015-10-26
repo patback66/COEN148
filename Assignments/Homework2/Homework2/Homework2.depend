@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1445534917 source:/home/maskoken/Dropbox/Documents/COEN148/Assignments/Homework2/Homework2/main.cpp
+1445635961 source:/home/maskoken/Dropbox/Documents/COEN148/Assignments/Homework2/Homework2/main.cpp
 	<windows.h>
 	<GLUT/glut.h>
 	<OpenGL/gl.h>
@@ -11,7 +11,6 @@
 	<stdio.h>
 	<cstdlib>
 	<ctime>
-	<iostream>
 	"FaceData.h"
 
 1445455415 /home/maskoken/Dropbox/Documents/COEN148/Assignments/Homework2/Homework2/FaceData.h
