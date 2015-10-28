@@ -1,0 +1,30 @@
+10_27_15
+
+Back-face culling
+Depth-buffer (Z-buffer) algorithm
+Scan-line algorithm
+Depth-sort algorithm
+
+More Hidden Surface Removal, some other ideas
+	-A-buffer method (extension of z-buffer method)
+	-BSP tree method
+	-Area-subdivision method
+	-Octree method
+	-Ray-casting method
+	-Wireframe
+
+Illumination (lighting, shading)
+	-Is a model to simulate lighting effect (shading effect) on object surface based on the physical laws
+	-Shading Model, Lighting Model, Illumination Model
+	-Used to calculate an illuminated position on the surface of an object
+	-2 Deciding factors:
+		-Surface properties: material, texture, transparency, reflection, color
+		-Light source: position, color, intensity, type
+	-Point Light - puts light in all directions
+	-Parallel Light - direction, unlimited range
+	-Spotlight - has direction and range - cone of light
+	-Large light source - grid of directional point light
+	-Rough surface - diffuse reflection (lambert reflection)
+	-Smooth surface - specular reflection
+	-Ambient Light / Backroung light - light reflected from surrounding objects
+
