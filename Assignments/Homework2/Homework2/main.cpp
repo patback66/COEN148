@@ -54,16 +54,6 @@ float radians(float degrees) {
     return ( degrees * M_PI ) / 180 ;
 }
 
-void seedRandomColors() {
-    srand (static_cast <unsigned> (time(0)));
-
-    for(int i = 0; i < 13806; i++) {
-        colors[i][0] = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-        colors[i][1] = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-        colors[i][2] = 0.5f + static_cast <float> (rand()) / static_cast <float> (RAND_MAX/0.5f);
-    }
-}
-
 
 void init(void){
 
@@ -80,9 +70,6 @@ void init(void){
 	glMatrixMode(GL_PROJECTION);
     gluPerspective (90.0, 1, 0.01, 100); //50
     glMatrixMode(GL_MODELVIEW);
-
-
-    seedRandomColors();
 }
 
 //mouse drag input
@@ -117,25 +104,26 @@ void buildModel() {
         glBegin(GL_TRIANGLES);
 
         //generate a color based on which polygon we are working with
-        float r = static_cast <float> ((int)(face_indicies[i][0]) * 4 % 255) / 100.00f;
-        float g = static_cast <float> ((int)(face_indicies[i][1]) * 3 % 255) / 100.00f;
-        float b = static_cast <float> ((int)(face_indicies[i][2]) * 5 % 255) / 100.00f;
-        /*float r = colors[i][0];
-        float g = colors[i][1];
-        float b = colors[i][2];*/
+        float r = static_cast <float> ((int)(face_indicies[i][0]) * 3 % 255) / 100.00f;
+        float g = static_cast <float> ((int)(face_indicies[i][1]) * 5 % 255) / 100.00f;
+        float b = static_cast <float> ((int)(face_indicies[i][2]) * 7 % 255) / 100.00f;
 
-
-        glColor3f(r, g, b);
+        //glColor3f(r, g, b);
+        glColor3f(0.99609375, 0.875, 0.765625);
 
         //add the vertices for each polygon
         for(int j = 0; j < 3; j++) {
             GLfloat x = vertices[face_indicies[i][j]][0];
             GLfloat y = vertices[face_indicies[i][j]][1];
             GLfloat z = vertices[face_indicies[i][j]][2];
-            glVertex3d(x, y, z );
+
+            glNormal3f(normals[face_indicies[i][j+3]][0], normals[face_indicies[i][j+3]][1], normals[face_indicies[i][j+3]][2]);
+            glVertex3f(x, y, z );
+
         }
         glEnd();
     }
+    glEnable(GL_NORMALIZE);
 }
 
 void display(void){
@@ -254,6 +242,12 @@ void processMenuEvents(int option) {
 	case 2:					//wireframe
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		break;
+    case 3:
+        glShadeModel(GL_FLAT);
+        break;
+    case 4:
+        glShadeModel(GL_SMOOTH);
+        break;
 	default:
 		break;
 	}
@@ -270,6 +264,8 @@ void createMenu() {
 	//Menu options
 	glutAddMenuEntry("Solid", 1);
 	glutAddMenuEntry("Wireframe", 2);
+	glutAddMenuEntry("Flat Render", 3);
+	glutAddMenuEntry("Render Smooth", 4);
 
 	//set the menu to the right button
 	glutAttachMenu(GLUT_RIGHT_BUTTON);

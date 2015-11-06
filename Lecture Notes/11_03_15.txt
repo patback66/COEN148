@@ -1,0 +1,20 @@
+11_03_15
+
+Finished Lighting model
+	-Ambient + Diffuse + Specular = Phong reflection
+
+Rendering
+	-Flat
+	-
+
+Phong Lighting model
+	-gives a focused highlight
+Global Illumination
+
+Local Illumination
+	-only consider contribution from the light directly (primary rays)
+	-not considered contribution from reflection and refraction from other objects (secondary rays)
+
+GLobal Illumination
+	-Ray tracing
+		-will take "bouncing light", secondary rays (reflection and refraction between objects) into consideration
