@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1447801051 source:/home/maskoken/Dropbox/Documents/COEN148/Assignments/Homework3/Homework3/main.cpp
+	<GLUT/glut.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/glut.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<math.h>
+

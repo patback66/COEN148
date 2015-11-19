@@ -1,0 +1,35 @@
+11_12_15
+
+Texture Mapping
+
+Techniques to add surface detail
+	-2 Ways
+		1) Add extra small polygons to create surface detail. This will increase scene complexity and thus slow down the rendering speed. Also some detail features are hard to model!
+		2) Map a texture image to the surface. This is a more popular approach. The surface detail does not affext the geometry complexity.
+	-The texture here could be different types of surface properties: color, normal, specular
+	-Bitmpap (pixel map) image
+		-This is a 2D image, represented by a 2D array: Texture[height][width][3] (rgb)
+		-each pixel is located as (s,t) and is called a texel
+			-(s,t) is normalized into [0,1] range
+			-Specify map between texture coordinates to each corner of the polygon. Sometimes this process is done manually or automatically
+	-Process
+		-texture->object->screen image
+	-Rasterization
+	-How to map
+		-linear mapping
+		-intermediate map object (map shape)
+	-Interpolation
+	-Map Shape
+		-to simplify the problem of mappiong from an image to an arbitrary model, we use an object we already have a map for as an intermediate object (map shape)
+		-Texture -> intermediate -> object
+		-Planar map: to look up texture for (xyz) on 3D object, throw away one coordinate, for example z, then use (x,y) to look up color in texture map
+		-Sphere Map:
+			(x,y,z) -> (latitude, longitude)
+		-Cube Map
+		-Texture coordinates need to move with object coordinates. Need to change the texture map if move the object
+		-Texture can be used for more than color
+			-Displacement mapping:
+				-the texture is used to perturb the surface geommetry itself (animate the surface), geometry surface is modified
+			-Bump mapping
+				-simulating bumps and wrinkles on the surface of an object by perturbing the surface normals
+				

@@ -1,0 +1,42 @@
+11_17_15
+
+Texture Mapping
+	-bitmap
+
+Global Illumination
+	-Radiocity
+
+Radiocity
+	-The images that result have a softer shadow
+	-Color Bleeding
+		-Reflection of light energy in an environment prodces a phenomenon known as "color bleeding," where a brightly colored surface's color will "bleed" onto adjacent surfaces
+		-Thermal radiation
+	- E=hf -> max planck law -> single photon
+		E = planck's constant * frequency
+			- h = 6.2e-34 Joules/sec. for all photon
+			E = sum(hf) all photons
+	-Radiant flux
+		-Radiosity: the rate of energy leaving the surface
+		B=d(phi)/dA ->per unit area
+		I = intensity, phi in some direction
+		B = pi * I
+	Radiosity illumination model
+		-Light - direct from source, reflected from surface (reflected light energy)
+		Pillum = direct light from light + indirect light from other surfaces
+		surface K is either emitter (light source) or emitter/reflector
+	Radiosity
+		Bk = Ek + PkHk
+			Ek for non-light, Ek=0
+			Hk = sum(Bj * Fj->k, j=1, n) depends on the form factor ->percentage of radiant energy of surface j that can reach surface k
+
+		Bk = Ek + Pk*sum(BjFj->k, j-1, n)
+
+		Bk - sum(BjFjk, j=1, n) = Ek
+		Bk - PkBkFkk - Pk*sum()
+		(1-PkFkk)Bk - Pk * sum(BjFjk, j!=k, n) = Ex
+
+		Calculate form factor
+		Nusselt-analog
+			Fjk = A/B
+
+		Divide the scene into many small surfaces

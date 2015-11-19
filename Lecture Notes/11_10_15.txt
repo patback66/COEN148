@@ -1,0 +1,11 @@
+11_10_15
+
+Ray Tracing/Casting - RECAP
+
+Assignment
+	-mostly ray casting/shading
+		-+reflection/refraction
+
+Ray Tracing - Antialiasing
+	-A main issue of rendering, is "blocky" edge
+	

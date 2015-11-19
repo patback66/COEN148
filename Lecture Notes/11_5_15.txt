@@ -2,4 +2,6 @@
 
 Ray tracing
 	-Recursive tree
+	-ray casting
+	-reflection, specular, shadow, refraction
 	

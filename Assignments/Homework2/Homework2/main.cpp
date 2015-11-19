@@ -50,6 +50,9 @@ float zoomFactor = 1.0;
 double camera_center[3] = {0.0,0.0,0.0};
 float colors[13806][3];
 
+int wire = 1;
+int fill = 0;
+
 float radians(float degrees) {
     return ( degrees * M_PI ) / 180 ;
 }
@@ -97,6 +100,8 @@ void OnMouseMove(int x, int y) {
 	glutPostRedisplay();
 }
 
+
+
 //Draws the model based on data in FACE_DATA
 void buildModel() {
     //iterate throught the list of polygons
@@ -111,20 +116,65 @@ void buildModel() {
         //glColor3f(r, g, b);
         glColor3f(0.99609375, 0.875, 0.765625);
 
+        //n=(P2-P1) * (P3 - P1)
+
+        //P2-P1
+        GLfloat U[] = {vertices[face_indicies[i][1]][0] - vertices[face_indicies[i][0]][0],
+                       vertices[face_indicies[i][1]][1] - vertices[face_indicies[i][0]][1],
+                       vertices[face_indicies[i][1]][2] - vertices[face_indicies[i][0]][2]};
+        //P3-P1
+        GLfloat V[] = {vertices[face_indicies[i][2]][0] - vertices[face_indicies[i][0]][0],
+                       vertices[face_indicies[i][2]][1] - vertices[face_indicies[i][0]][1],
+                       vertices[face_indicies[i][2]][2] - vertices[face_indicies[i][0]][2]};
+        //N = U x V
+        GLfloat N[] = {U[1]*V[2] - U[2]*V[1], U[2]*V[0] - U[0]*V[2], U[0]*V[1] - U[1]*V[0]};
+
         //add the vertices for each polygon
         for(int j = 0; j < 3; j++) {
             GLfloat x = vertices[face_indicies[i][j]][0];
             GLfloat y = vertices[face_indicies[i][j]][1];
             GLfloat z = vertices[face_indicies[i][j]][2];
 
-            glNormal3f(normals[face_indicies[i][j+3]][0], normals[face_indicies[i][j+3]][1], normals[face_indicies[i][j+3]][2]);
+            //glNormal3f(normals[face_indicies[i][j+3]][0], normals[face_indicies[i][j+3]][1], normals[face_indicies[i][j+3]][2]);
+            glNormal3f(N[0], N[1], N[2]);
             glVertex3f(x, y, z );
-
         }
         glEnd();
     }
     glEnable(GL_NORMALIZE);
 }
+
+void face_wire() {
+    for(int i = 0; i < 13806; i++) {
+        glBegin(GL_TRIANGLES);
+
+        //add the vertices for each polygon
+        for(int j = 0; j < 3; j++) {
+            GLfloat x = vertices[face_indicies[i][j]][0];
+            GLfloat y = vertices[face_indicies[i][j]][1];
+            GLfloat z = vertices[face_indicies[i][j]][2];
+            glVertex3f(x, y, z );
+        }
+        glEnd();
+    }
+}
+
+void face_solid() {
+    for(int i = 0; i < 13806; i++) {
+        glBegin(GL_TRIANGLES);
+
+        //add the vertices for each polygon
+        for(int j = 0; j < 3; j++) {
+            GLfloat x = vertices[face_indicies[i][j]][0];
+            GLfloat y = vertices[face_indicies[i][j]][1];
+            GLfloat z = vertices[face_indicies[i][j]][2];
+
+            glVertex3f(x, y, z );
+        }
+        glEnd();
+    }
+}
+
 
 void display(void){
 
@@ -163,7 +213,39 @@ void display(void){
 	//Draw triangle mesh
 	//glPushMatrix();
 	//glScalef(zoomFactor, zoomFactor, zoomFactor);
-	buildModel();
+	glDisable(GL_LIGHTING);
+    if(wire && !fill) {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        glEnable(GL_DEPTH_TEST);
+        glColor4f(0, 0, 0, 1);
+        face_wire();
+    }
+
+    if(fill && !wire) {
+        glEnable(GL_LIGHTING);
+        buildModel();
+        glDisable(GL_LIGHTING);
+    }
+
+    if(fill && wire) {
+        glEnable(GL_DEPTH_TEST);
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        glColor4f(0, 0, 0, 1);
+        face_wire();
+
+
+        glEnable(GL_POLYGON_OFFSET_FILL);
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        glPolygonOffset(1.0, 1.0);
+        glColor4f(1, 1, 1, 1);
+        face_solid();
+        glDisable(GL_POLYGON_OFFSET_FILL);
+    }
+
+    glEnable(GL_LIGHTING);
+
+
+
 	//glPopMatrix();
 
 
@@ -238,14 +320,23 @@ void processMenuEvents(int option) {
 	switch (option) {
 	case 1:					//solid
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		wire = 0;
+		fill = 1;
 		break;
 	case 2:					//wireframe
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		wire = 1;
+		fill = 0;
 		break;
-    case 3:
-        glShadeModel(GL_FLAT);
+    case 3:                 //wireframe hidden
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        wire = 1;
+        fill = 1;
         break;
     case 4:
+        glShadeModel(GL_FLAT);
+        break;
+    case 5:
         glShadeModel(GL_SMOOTH);
         break;
 	default:
@@ -264,8 +355,9 @@ void createMenu() {
 	//Menu options
 	glutAddMenuEntry("Solid", 1);
 	glutAddMenuEntry("Wireframe", 2);
-	glutAddMenuEntry("Flat Render", 3);
-	glutAddMenuEntry("Render Smooth", 4);
+	glutAddMenuEntry("Wireframe - hidden", 3);
+	glutAddMenuEntry("Flat Render", 4);
+	glutAddMenuEntry("Render Smooth", 5);
 
 	//set the menu to the right button
 	glutAttachMenu(GLUT_RIGHT_BUTTON);

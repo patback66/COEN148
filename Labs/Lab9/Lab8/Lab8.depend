@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1447715295 source:/home/maskoken/Dropbox/Documents/COEN148/Labs/Lab8/Lab8/main.cpp
+	<GLUT/glut.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/glut.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<math.h>
+
+1447715831 source:/home/maskoken/Dropbox/Documents/COEN148/Labs/Lab9/Lab8/main.cpp
+	<GLUT/glut.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/glut.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<math.h>
+
