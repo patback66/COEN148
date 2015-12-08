@@ -1,0 +1,50 @@
+11_19_15
+
+Computer Animation
+
+Animation
+	-Persistence of vision
+	-Human eye will retain an image it has seen for a brief moment
+		-thaumatrope
+		-when many images are passing the eye, the eye retains each one and the brain interprets as a continuous image
+	-Zoetrope
+	-Beta movement
+	-Key frame vs in-between
+
+Computer Animation
+	-Tools - replace physical cel
+	-Key-framed - program can produce in-between frames of key frames
+	-Procedural - use mathematical/physical equations to calculate the positions of objects
+
+Key-framed system:
+	-use linear interpolation
+	-automaically generate in betweens
+
+Image Morphing
+	-Image warping
+		-change the pixel position (instead of the color)
+		-Transform the pixel location using functions
+	-Use geometric transformation
+		-translation, scaling, rotation
+	-Use Polynomial transformation
+		-deformations	
+	-How to find the mapping function?
+		-select k corresponding points on two images
+			-these points should be "points of interest" - corners of eyes, mouth corners, etc
+		-determine the coefficients ai, bi, i = 0, ..., N-1 by solving
+			-N is the order of the polynomial, so number of points K need to be enough to solve this equation, which means, K>=N
+
+	Motion Path
+		-Geometric transformation
+		-Approximation: use some math functions
+
+	Timing
+		-model speed up
+
+	Motion Capture
+		-Similar to rotoscoping
+	Double Buffering - for smooth animation
+		-draw image to color buffer, screen is constantly updated from color buffer, if screen is updated before drawing is done, get flickery animation
+	Live action + animation
+		- use after effect to merge animation into live video
+	Collision detection

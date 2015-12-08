@@ -6,7 +6,9 @@
 //
 //  sample program for lab4
 
-#include <GL/GLUT.h>
+#include <GL/glut.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
 
 GLint winWidth = 600, winHeight = 600;   //  Initial display-window size.
 

@@ -1,5 +1,6 @@
 # depslib dependency file v1.0
-1447801051 source:/home/maskoken/Dropbox/Documents/COEN148/Assignments/Homework3/Homework3/main.cpp
+1449013026 source:/home/maskoken/Dropbox/Documents/COEN148/Assignments/Homework3/Homework3/main.cpp
+	<stdio.h>
 	<GLUT/glut.h>
 	<OpenGL/gl.h>
 	<OpenGL/glu.h>
@@ -7,4 +8,20 @@
 	<GL/gl.h>
 	<GL/glu.h>
 	<math.h>
+	<algorithm>
+	<iostream>
+	<vector>
+	<stdlib.h>
+	"Vector.h"
+	"Object.h"
+
+1448753592 /home/maskoken/Dropbox/Documents/COEN148/Assignments/Homework3/Homework3/Vector.h
+
+1448422820 /home/maskoken/Dropbox/Documents/COEN148/Assignments/Homework3/Homework3/Sphere.h
+	"Vector.h"
+
+1449000004 /home/maskoken/Dropbox/Documents/COEN148/Assignments/Homework3/Homework3/Object.h
+	"Vector.h"
+	<iostream>
+	<stdio.h>
 

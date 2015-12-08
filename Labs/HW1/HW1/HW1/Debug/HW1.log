@@ -1,0 +1,31 @@
+﻿Build started 10/5/2015 10:15:52 PM.
+     1>Project "\\samba1\mkoken\dcengr\My Documents\coen148\HW1\HW1\HW1\HW1.vcxproj" on node 2 (Rebuild target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D CODE_ANALYSIS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze /analyze:plugin"C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\\bin\localespc.dll" /errorReport:prompt   /analyze:quiet main.cpp
+         main.cpp
+     1>\\samba1\mkoken\dcengr\my documents\coen148\hw1\hw1\hw1\main.cpp(74): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>\\samba1\mkoken\dcengr\my documents\coen148\hw1\hw1\hw1\main.cpp(101): warning C4018: '<' : signed/unsigned mismatch
+     1>\\samba1\mkoken\dcengr\my documents\coen148\hw1\hw1\hw1\main.cpp(104): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>\\samba1\mkoken\dcengr\my documents\coen148\hw1\hw1\hw1\main.cpp(108): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>\\samba1\mkoken\dcengr\my documents\coen148\hw1\hw1\hw1\main.cpp(120): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>\\samba1\mkoken\dcengr\my documents\coen148\hw1\hw1\hw1\main.cpp(124): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>\\samba1\mkoken\dcengr\my documents\coen148\hw1\hw1\hw1\main.cpp(155): warning C4018: '<' : signed/unsigned mismatch
+     1>\\samba1\mkoken\dcengr\my documents\coen148\hw1\hw1\hw1\main.cpp(158): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>\\samba1\mkoken\dcengr\my documents\coen148\hw1\hw1\hw1\main.cpp(192): warning C4018: '<' : signed/unsigned mismatch
+     1>\\samba1\mkoken\dcengr\my documents\coen148\hw1\hw1\hw1\main.cpp(193): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>\\samba1\mkoken\dcengr\my documents\coen148\hw1\hw1\hw1\main.cpp(196): warning C4244: 'argument' : conversion from 'float' to 'GLint', possible loss of data
+     1>\\samba1\mkoken\dcengr\my documents\coen148\hw1\hw1\hw1\main.cpp(198): warning C4244: 'argument' : conversion from 'float' to 'GLint', possible loss of data
+     1>\\samba1\mkoken\dcengr\my documents\coen148\hw1\hw1\hw1\main.cpp(221): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>\\samba1\mkoken\dcengr\my documents\coen148\hw1\hw1\hw1\main.cpp(256): warning C4244: 'argument' : conversion from 'float' to 'GLint', possible loss of data
+     1>\\samba1\mkoken\dcengr\my documents\coen148\hw1\hw1\hw1\main.cpp(267): warning C4244: 'argument' : conversion from 'float' to 'GLint', possible loss of data
+     1>\\samba1\mkoken\dcengr\my documents\coen148\hw1\hw1\hw1\main.cpp(268): warning C4244: 'argument' : conversion from 'float' to 'GLint', possible loss of data
+     1>\\samba1\mkoken\dcengr\my documents\coen148\hw1\hw1\hw1\main.cpp(272): warning C4244: 'argument' : conversion from 'float' to 'GLint', possible loss of data
+     1>\\samba1\mkoken\dcengr\my documents\coen148\hw1\hw1\hw1\main.cpp(273): warning C4244: 'argument' : conversion from 'float' to 'GLint', possible loss of data
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"\\samba1\mkoken\dcengr\My Documents\coen148\HW1\HW1\Debug\HW1.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"\\samba1\mkoken\dcengr\My Documents\coen148\HW1\HW1\Debug\HW1.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"\\samba1\mkoken\dcengr\My Documents\coen148\HW1\HW1\Debug\HW1.lib" /MACHINE:X86 Debug\main.obj
+         HW1.vcxproj -> \\samba1\mkoken\dcengr\My Documents\coen148\HW1\HW1\Debug\HW1.exe
+     1>Done Building Project "\\samba1\mkoken\dcengr\My Documents\coen148\HW1\HW1\HW1\HW1.vcxproj" (Rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:04.93

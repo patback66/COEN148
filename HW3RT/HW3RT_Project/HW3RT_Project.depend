@@ -1,0 +1,38 @@
+# depslib dependency file v1.0
+1449524476 source:/home/maskoken/Dropbox/Documents/COEN148/HW3RT/HW3RT_Project/main.cpp
+	<stdio.h>
+	<GLUT/glut.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/glut.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<math.h>
+	<vector>
+	<stdlib.h>
+	<cstdlib>
+	<cstdio>
+	<cmath>
+	<fstream>
+	<vector>
+	<iostream>
+	<cassert>
+	<algorithm>
+	<limits>
+	"Object.h"
+	"Vector.h"
+
+1449461495 /home/maskoken/Dropbox/Documents/COEN148/HW3RT/HW3RT_Project/Vector.h
+	<stdlib.h>
+
+1449461726 /home/maskoken/Dropbox/Documents/COEN148/HW3RT/HW3RT_Project/Object.h
+	"Vector.h"
+	<math.h>
+
+1449030070 source:/home/maskoken/Dropbox/Documents/COEN148/HW3RT/HW3RT_Project/Object.h
+	"Vector.h"
+	<math.h>
+
+1449030057 source:/home/maskoken/Dropbox/Documents/COEN148/HW3RT/HW3RT_Project/Vector.h
+	<stdlib.h>
+

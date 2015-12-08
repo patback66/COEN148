@@ -1,0 +1,14 @@
+12_1_15
+
+Graphics Pipeline
+
+Shader
+	-Programmable GPUS
+	-Use Shaders - HLSL, GLSL, use the video card
+	-Vertex shaders
+	-Fragment shaders
+	-Clipping
+	-Interpolation (not programmable)
+	-Fragment Shader
+	**Understand the pipeline**
+	

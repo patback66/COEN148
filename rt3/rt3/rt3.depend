@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1449020269 source:/home/maskoken/Dropbox/Documents/COEN148/rt3/rt3/rt3/Source.cpp
+	<cstdlib>
+	<cstdio>
+	<cmath>
+	<fstream>
+	<vector>
+	<iostream>
+	<cassert>
+	<algorithm>
+	"GL/glut.h"
+

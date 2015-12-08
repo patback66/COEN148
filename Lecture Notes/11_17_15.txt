@@ -27,7 +27,7 @@ Radiocity
 	Radiosity
 		Bk = Ek + PkHk
 			Ek for non-light, Ek=0
-			Hk = sum(Bj * Fj->k, j=1, n) depends on the form factor ->percentage of radiant energy of surface j that can reach surface k
+			Hk = sum(Bj * Fj->k, j=1, n) depends on the form factor ->percentage fo radiant energy of surface j that can reach surface k
 
 		Bk = Ek + Pk*sum(BjFj->k, j-1, n)
 
