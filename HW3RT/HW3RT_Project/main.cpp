@@ -1,6 +1,14 @@
 /*
-@author Matthew Koken <mkoken@scu.edu>
-@assignment
+* @author Matthew Koken <mkoken@scu.edu>
+* @assignment COEN148 Homework 3
+* 
+* note: plane works proper on windows using visual studio, but does not show on linux using the same code. May not
+* work properly on osx either.
+* 
+* Part 1, 2, and 3 have all been implemented. Recursive ray casting gives reflection, diffuse shading, phong shading,
+* refraction, etc. Spheres and planes have been implemented. Ellipsoids and boxes are still works in progress and don't
+* properly function, but the code is still present. Part 4 has not been implemented.
+*
 */
 #include <stdio.h>
 #ifdef __APPLE__
@@ -37,10 +45,6 @@
 #define M_PI   3.14159265358979323846264338327950288
 #endif
 
-#ifndef GL_CLAMP_TO_EDGE
-const double GL_CLAMP_TO_EDGE = 0x812F;
-#endif
-
 const int width = 800, height = 800;
 //Vectorf backgroundColor = Vectorf(0.52941176470588235294117647058824, 0.8078431372549019607843137254902, 0.92156862745098039215686274509804); sky blue
 Vectorf backgroundColor = Vectorf(.031, .325, .659);
@@ -57,9 +61,9 @@ T mix(const T &a, const T &b, const T &mix)
 	return b * mix + a * (T(1) - mix);
 }
 
-//calculate kr of the fresnel effect given index of refractions + 
-double fresnel( const float &n1, const float &n2, const float &cosi,
-  const float &cost) {
+//calculate kr of the fresnel effect given index of refractions +
+double fresnel( const double &n1, const double &n2, const double &cosi,
+  const double &cost) {
 	//From wikipedia page equations
 	//rs = (n1cos(theta i) - n2cos(theta t)) / (n1cos(theta i) + n2cos(theta t))
 	//rp = (n2cos(theta i) - n1cos(theta t)) / (n1cos(theta t) + n2cos(theta i))
@@ -112,8 +116,8 @@ Vectorf trace(const Ray &ray,
 
 	nInt.normalize(); // normalize normal direction
 					  // The angle between raydir and the normal at point hit (not used).
-    float s_angle = acos(ray.direction.dot(nInt)) / ( sqrt(ray.direction.dot(ray.direction)) * sqrt(nInt.dot(nInt)));
-    float s_incidence = sin(s_angle);
+    double s_angle = acos(ray.direction.dot(nInt)) / ( sqrt(ray.direction.dot(ray.direction)) * sqrt(nInt.dot(nInt)));
+    double s_incidence = sin(s_angle);
 
 	double bias = 1e-2; // add some bias to the point from which we will be tracing
 
@@ -150,14 +154,59 @@ Vectorf trace(const Ray &ray,
 			refraction = trace(refr, shapes, depth + 1);
 
 			//refracting so can get a better fresnel effect
-            float cosi = ray.direction.dot(-nInt);
-            float cost = refr.direction.dot(-nInt);
+            double cosi = ray.direction.dot(-nInt);
+            double cost = refr.direction.dot(-nInt);
 			fresneleffect = fresnel(1, curShape->indexOfRefraction, cosi, cost);
 		}
 		// now mix the reflection and refraction parts to get the color at the pixel
 		// fresnel: kt = 1 - kr, kr = fresneleffect
 		surfaceColor = (reflection * fresneleffect + refraction * (1 - fresneleffect) * curShape->transparency) * curShape->color;
+
+		//now calculate light for the object
+		double shadow = 1.0;
+		for (int i = 0; i < shapes.size(); i++) {
+			if (shapes[i]->emissionColor.x > 0 || shapes[i]->emissionColor.y > 0 || shapes[i]->emissionColor.z > 0) {
+				// this is a light, calculate the light ray
+				Vectorf transmission = 1.0;
+				Vectorf lightDirection = shapes[i]->center - pInt;
+				lightDirection.normalize();
+				//angle of the light ray
+				double lightAngle = (acos(ray.direction.dot(lightDirection)) / (sqrt(ray.direction.dot(ray.direction)) * sqrt(lightDirection.dot(lightDirection))));
+
+				//check all shapes that may be seen by the light
+				for (int j = 0; j < shapes.size(); ++j) {
+					if (i != j) {
+						double t0, t1;
+
+						Ray shadowRay;
+						shadowRay.origin = pInt + (nInt * bias);
+						shadowRay.direction = lightDirection;
+
+						// check for new intersection with the light ray
+						if (shapes[j]->intersect(shadowRay, &t0, &t1)) {	//if there is an intersection, then the shape is in a shadow
+							shadow = std::max(0.0, shadow - (1.0 - shapes[j]->transparency));
+							transmission = transmission * shapes[j]->color * shadow;
+						}
+						else { //not in shadow -> calculate phong
+							double intensity = (0.2126*shapes[i]->emissionColor.x + 0.7152*shapes[i]->emissionColor.y + 0.0722*shapes[i]->emissionColor.z); //intensity of the visible light
+
+							//specular color calculation only because reflective/refractive
+							Vectorf reflectionDir;
+							if(shapes[j]->reflectivity>0) //need the reflection at the shape we're looking at
+								reflectionDir = ray.direction - nInt * 2 * ray.direction.dot(nInt);
+
+							//compute for phong equation once we have everything
+							surfaceColor += curShape->color * pow(std::max(double(0), double(reflectionDir.dot(lightDirection))), 100) * shapes[i]->emissionColor * intensity;
+						}
+					}
+				}
+				// For each light found, we add the transmitted light
+				surfaceColor += curShape->color * transmission *
+					std::max(double(0), nInt.dot(lightDirection)) * shapes[i]->emissionColor;
+			}
+		}
 	}
+
 	else {
 		// it's a diffuse object, don't recurse more
 		// Look at all sphere to find lights
@@ -179,7 +228,7 @@ Vectorf trace(const Ray &ray,
 						Ray shadowRay;
 						shadowRay.origin = pInt + (nInt * bias);
 						shadowRay.direction = lightDirection;
-						
+
 						// check for new intersection with the light ray
 						if (shapes[j]->intersect(shadowRay, &t0, &t1)) {	//if there is an intersection, then the shape is in a shadow
 							shadow = std::max(0.0, shadow - (1.0 - shapes[j]->transparency));
@@ -189,14 +238,14 @@ Vectorf trace(const Ray &ray,
 							double intensity = (0.2126*shapes[i]->emissionColor.x + 0.7152*shapes[i]->emissionColor.y + 0.0722*shapes[i]->emissionColor.z); //intensity of the visible light
 							//diffuse color calculation
 							surfaceColor += curShape->color * std::max(double(0), double(nInt.dot(lightDirection))) * shapes[i]->emissionColor * intensity;
-							
+
 							//specular color calculation
 							Vectorf reflectionDir;
 							if(shapes[j]->reflectivity>0) //need the reflection at the shape we're looking at
 								reflectionDir = ray.direction - nInt * 2 * ray.direction.dot(nInt);
 
 							//compute for phong equation once we have everything
-							surfaceColor += curShape->color * pow(std::max(double(0), double(reflectionDir.dot(lightDirection))), 2) * shapes[i]->emissionColor * intensity;
+							surfaceColor += curShape->color * pow(std::max(double(0), double(reflectionDir.dot(lightDirection))), 10) * shapes[i]->emissionColor * intensity;
 						}
 					}
 				}
@@ -235,9 +284,9 @@ void render(const std::vector<Object *> &spheres)
 
 			Vectorf color = trace(primRay, spheres, 0);
 
-			glPointSize(2);
+			glPointSize(1.5);
 			glColor3f(color.x, color.y, color.z);
-			glBegin(GL_POINTS);			
+			glBegin(GL_POINTS);
 			//map to the proper window coordinates, otherwise image is flipped
 			glVertex2i(x, height-y);
 			glEnd();
@@ -250,7 +299,7 @@ void render(const std::vector<Object *> &spheres)
 void display(void)
 {
 	//render the scene
-	render(shapes); 
+	render(shapes);
 	glutSwapBuffers();
 
 	glFlush();
@@ -287,7 +336,7 @@ int main(int argc, char **argv)
 	//Plane: point on plane, a, b, c, surface color, type, reflectivity, transparency, index of refraction, emission color
 	shapes.push_back(new Plane(Vectorf(-10, -3.1, -10), 0, 1, 0, Vectorf(0.09), kDiffuse, 0, 0, 1.3));
 
-	shapes.push_back(new Sphere(Vectorf(3, 0, -15), 2, Vectorf(1, .6, .6), kDiffuse, 1.2, 1, 5));
+	shapes.push_back(new Sphere(Vectorf(3, 0, -15), 2, Vectorf(.1, .6, .6), kDiffuse, 1.2, 1, 5));
 	shapes.push_back(new Sphere(Vectorf(1, 2, -18), 2, Vectorf(1, 1, 1), kPhong, 5, 0, 1.1));
 	shapes.push_back(new Sphere(Vectorf(-2, 3, -16), 1, Vectorf(.75, 0.75, .75), kPhong, 5, 0, 1.1));
 	shapes.push_back(new Sphere(Vectorf(-2, -1, -15), 2, Vectorf(0.1, 0.1, 1.0), kDiffuse, 0, 0, 2.0));
@@ -298,7 +347,7 @@ int main(int argc, char **argv)
 
 	// lights
 	shapes.push_back(new Sphere(Vectorf(100, 300, 10), 3, Vectorf(0), kDiffuse, 0, 0, 1, Vectorf(.7))); //white light on the right
-	shapes.push_back(new Sphere(Vectorf(-10, 10, 0), 3, Vectorf(0), kDiffuse, 0, 0, 1, Vectorf(.5, 0, 0))); //red light on the left
+	shapes.push_back(new Sphere(Vectorf(-10, 10, 0), 3, Vectorf(0), kDiffuse, 0, 0, 1, Vectorf(.3, 0, 0))); //red light on the left
 
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);

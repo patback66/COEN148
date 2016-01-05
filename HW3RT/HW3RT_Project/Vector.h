@@ -7,12 +7,12 @@
 #include <stdlib.h>
 class Point {
     public:
-        float x, y, z;
+        double x, y, z;
         Point() : x(0), y(0), z(0) {}
-        Point(float X, float Y, float Z) : x(X), y(Y), z(Z) {}
+        Point(double X, double Y, double Z) : x(X), y(Y), z(Z) {}
 };
 
-// Vector class, has arithmetic operations, dot product, 
+// Vector class, has arithmetic operations, dot product,
 template<typename T>
 class Vector {
     public:

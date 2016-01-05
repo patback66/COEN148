@@ -1,16 +1,18 @@
-﻿Build started 12/7/2015 1:42:55 PM.
-     1>Project "F:\Documents\Dropbox\Documents\COEN148\HW3RT\HW3RT\HW3RT\HW3RT.vcxproj" on node 2 (Rebuild target(s)).
+﻿Build started 12/10/2015 2:35:22 PM.
+     1>Project "F:\Documents\Dropbox\Documents\COEN148\HW3RT\HW3RT\HW3RT\HW3RT.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D CODE_ANALYSIS /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze /analyze:plugin"C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\\bin\localespc.dll" /errorReport:prompt   /analyze:quiet ..\..\HW3RT_Project\main.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\HW3RT_Project\main.cpp
          main.cpp
-     1>f:\documents\dropbox\documents\coen148\hw3rt\hw3rt_project\main.cpp(85): warning C4018: '<': signed/unsigned mismatch
-     1>f:\documents\dropbox\documents\coen148\hw3rt\hw3rt_project\main.cpp(165): warning C4018: '<': signed/unsigned mismatch
-     1>f:\documents\dropbox\documents\coen148\hw3rt\hw3rt_project\main.cpp(175): warning C4018: '<': signed/unsigned mismatch
+     1>f:\documents\dropbox\documents\coen148\hw3rt\hw3rt_project\main.cpp(89): warning C4018: '<': signed/unsigned mismatch
+     1>f:\documents\dropbox\documents\coen148\hw3rt\hw3rt_project\main.cpp(167): warning C4018: '<': signed/unsigned mismatch
+     1>f:\documents\dropbox\documents\coen148\hw3rt\hw3rt_project\main.cpp(177): warning C4018: '<': signed/unsigned mismatch
+     1>f:\documents\dropbox\documents\coen148\hw3rt\hw3rt_project\main.cpp(214): warning C4018: '<': signed/unsigned mismatch
+     1>f:\documents\dropbox\documents\coen148\hw3rt\hw3rt_project\main.cpp(224): warning C4018: '<': signed/unsigned mismatch
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\Documents\Dropbox\Documents\COEN148\HW3RT\HW3RT\Debug\HW3RT.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"F:\Documents\Dropbox\Documents\COEN148\HW3RT\HW3RT\Debug\HW3RT.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\Documents\Dropbox\Documents\COEN148\HW3RT\HW3RT\Debug\HW3RT.lib" /MACHINE:X86 Debug\main.obj
          HW3RT.vcxproj -> F:\Documents\Dropbox\Documents\COEN148\HW3RT\HW3RT\Debug\HW3RT.exe
-     1>Done Building Project "F:\Documents\Dropbox\Documents\COEN148\HW3RT\HW3RT\HW3RT\HW3RT.vcxproj" (Rebuild target(s)).
+     1>Done Building Project "F:\Documents\Dropbox\Documents\COEN148\HW3RT\HW3RT\HW3RT\HW3RT.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:03.12
+Time Elapsed 00:00:00.97

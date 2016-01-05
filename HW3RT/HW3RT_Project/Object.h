@@ -17,7 +17,7 @@ class Object {
 		double transparency, reflectivity;             /// surface transparency and reflectivity
 		matType kMatType;
 		Object(Vectorf c = Vectorf(0), Vectorf col = Vectorf(1), double n = 1.3,
-				float refl = 0, float tran = 0, Vectorf ec = Vectorf(0)) :
+				double refl = 0, double tran = 0, Vectorf ec = Vectorf(0)) :
                 color(col), indexOfRefraction(n), center(c),
 				transparency(tran), reflectivity(refl) {}
 
@@ -28,15 +28,16 @@ class Object {
 
         void setColor(Vectorf col) {color = col;}
         Vectorf getColor() {return color;}
+		virtual Vectorf getColor(Vectorf point) const { return color;}
 
-        void setIndexOfRefraction(float index) {indexOfRefraction = index;}
-        float getIndexOfRefraction() {return indexOfRefraction;}
+        void setIndexOfRefraction(double index) {indexOfRefraction = index;}
+        double getIndexOfRefraction() {return indexOfRefraction;}
 
-		void setTransparency(float t) { transparency = t; }
-		float getTransparency() { return transparency; }
+		void setTransparency(double t) { transparency = t; }
+		double getTransparency() { return transparency; }
 
-		void setReflectivity(float t) { reflectivity = t; }
-		float getReflectivity() { return reflectivity; }
+		void setReflectivity(double t) { reflectivity = t; }
+		double getReflectivity() { return reflectivity; }
 
 		void setEmissionColor(Vectorf ec) { emissionColor = ec; }
 		Vectorf getEmissionColor() { return emissionColor; }
@@ -83,11 +84,11 @@ public:
             return false;
 
 		//So use pythagoras' theorem, should have an intersection
-		
+
 		// remove the length tca to the power of two (tca * tca) and we get a distance from the center of the sphere to the power of 2 (d2).
 		double d2 = l.dot(l) - (tca * tca);
 		// if the distance^2 is greater than the radius^2, there is no intersection
-		if (d2 > radius2) 
+		if (d2 > radius2)
 			return false;
 
 		// yse Pythagoras' theorem again: radius2 is the hypotenuse and d2 is one of the side, get length thc
@@ -149,6 +150,7 @@ public:
 
 };
 
+#define OFFSET 25
 //class for a plane
 class Plane : public Object {
 public:
@@ -192,6 +194,19 @@ public:
 	//plane only has one normal
     Vectorf getLightDir(Vectorf pHit) const { return normal; }
 
+	//give checkboard like texture
+	/*Vectorf getColor(Vectorf point) const {
+		bool x = (int)(point.x + OFFSET) % 5 == 0;
+		bool y = (int)(point.y + OFFSET) % 5 == 0;
+		bool z = (int)(point.z + OFFSET) % 5 == 0;
+
+		if (x ^ y ^ z) {
+			return Vectorf(0, 0, 0);
+		}
+		else {
+			return Vectorf(1, 1, 1);
+		}
+	}*/
 
 };
 
@@ -206,7 +221,7 @@ public:
 	Vectorf min, max; //gives two corners diagonally opposite, the other points can be extrapolated from there
 
 	Box(const Vectorf &c, const Vectorf &mn, const Vectorf &mx, const Vectorf &sc, const matType mt = kDiffuse, const double &refl = 0,
-		const double &tran = 0, const double &n = 1, const Vectorf &ec = Vectorf(0)) : 
+		const double &tran = 0, const double &n = 1, const Vectorf &ec = Vectorf(0)) :
 		min(mn), max(mx) {
 		this->setCenter(c);
 		this->setColor(sc);
@@ -225,11 +240,11 @@ public:
 		Vectorf inv_dir = Vectorf(1 / ray.direction.x, 1 / ray.direction.y, 1 / ray.direction.z);
 		int sign[] = { inv_dir.x < 0, inv_dir.y < 0, inv_dir.z < 0 };
 		//bounds[0] = min, bounds[1] = max
-		
+
 		//x intersection boundaries
 		tmin = ((sign[0]) ? max.x : min.x) - ray.origin.x * inv_dir.x;
 		tmax = ((1 - sign[0]) ? max.x : min.x) - ray.origin.x * inv_dir.x;
-		
+
 		//y intersection boundaries
 		tymin = ((sign[1]) ? max.y : min.y) - ray.origin.y * inv_dir.y;
 		tymax = ((1 - sign[1]) ? max.y : min.y) - ray.origin.y * inv_dir.y;
@@ -277,7 +292,7 @@ public:
 		}
 		if ((tmin > tymax) || (tymin > tmax))
 			return false;
-		
+
 		if (tymin > tmin)
 				tmin = tymin;
 		if (tymax < tmax)
@@ -308,8 +323,8 @@ public:
 	Vectorf getNormal(Vectorf pHit) const {
 		Vectorf normal;
 		Vectorf localPoint = pHit - center;
-		float min = std::numeric_limits<float>::max();
-		float distance = std::abs(center.x - std::abs(localPoint.x));
+		double min = std::numeric_limits<double>::max();
+		double distance = std::abs(center.x - std::abs(localPoint.x));
 		if (distance < min) {
 			min = distance;
 			normal = Vectorf(1, 0, 0);
@@ -335,5 +350,3 @@ public:
 
 
 #endif // OBJECT_H_INCLUDED
-
-/**/
