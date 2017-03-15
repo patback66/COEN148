@@ -1,10 +1,10 @@
 /*
 * @author Matthew Koken <mkoken@scu.edu>
 * @assignment COEN148 Homework 3
-* 
+*
 * note: plane works proper on windows using visual studio, but does not show on linux using the same code. May not
 * work properly on osx either.
-* 
+*
 * Part 1, 2, and 3 have all been implemented. Recursive ray casting gives reflection, diffuse shading, phong shading,
 * refraction, etc. Spheres and planes have been implemented. Ellipsoids and boxes are still works in progress and don't
 * properly function, but the code is still present. Part 4 has not been implemented.
@@ -50,7 +50,7 @@ const int width = 800, height = 800;
 Vectorf backgroundColor = Vectorf(.031, .325, .659);
 static const double kInfinity = std::numeric_limits<double>::max(); //define infinity as the largest double we can use, since we use doubles
 
-const int MAX_RAY_DEPTH = 6;
+const int MAX_RAY_DEPTH = 100;
 
 std::vector<Object *> shapes;
 
